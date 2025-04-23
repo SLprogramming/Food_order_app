@@ -24,7 +24,7 @@ const Banner = () => {
   },[])
   return (
     
-    <div style={backgroundImage} className='w-full md:w-[80%] mx-auto overflow-x-hidden py-12'>
+    <div style={backgroundImage} className='w-full md:w-[80%] mx-auto py-12'>
       <div className="flex  text-white w-full flex-col justify-between items-center md:flex-row gap-3 md:gap-0 ">
 
         <div className='w-full text-center md:text-left md:w-[40%]'>

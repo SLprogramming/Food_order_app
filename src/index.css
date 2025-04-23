@@ -3,7 +3,7 @@
 :root {
   /* --color-primary: #f74114; */
   --color-primary: #F7B614;
-  --color-primary-dark: #e6a80c;
+  --color-primary-dark: #dfa208;
   --color-secondary: #282932;
  
 }
@@ -14,6 +14,7 @@ body{
   box-sizing:border-box;
   font-family: 'Poppins', sans-serif;
   background-color: #F3F4F6;
+  overflow-x: hidden;
  
 }
 
