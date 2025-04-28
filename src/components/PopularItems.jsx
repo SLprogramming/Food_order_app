@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react'
 import useStore from '../store/meal'
 
 
+
 const PopularItems = () => {
   const { getAllMealCategories,filterByCategoriesAreaIngredient } = useStore()
   const [categories, setCategories] = useState([])
   const [selectedCategoryId, setSelectedCategoryId] = useState(null)
   const [mealToShow, setMealToShow] = useState([])
+  const [isLoading,setIsLoading] = useState(false)
+
+
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await getAllMealCategories()
-      setCategories(getRandomItems(res, 4))
+      setCategories(getRandomItems(res.filter(item=>item?.strCategory!='Goat'), 4))
 
     }
     fetchData()
@@ -23,10 +27,14 @@ const PopularItems = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // setMealToShow([])
+      setIsLoading(true)
+  
      const res = await filterByCategoriesAreaIngredient('c', categories?.find(item => item?.idCategory == selectedCategoryId)?.strCategory)
       console.log(res)
-      if(res?.length){
 
+      if(res?.length){
+        setIsLoading(false)
         setMealToShow(getRandomItems(res, 6))
       }
     }
@@ -60,7 +68,9 @@ const PopularItems = () => {
 
 
       </ul>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 ${isLoading ? 'opacity-5' : 'opacity-100'} `}>
+      
+
         {mealToShow?.length > 0 && mealToShow.map((item, i) => {
           return (
             <div key={i} className='flex flex-col justify-center items-center'>
@@ -72,6 +82,7 @@ const PopularItems = () => {
             </div>
           )
         })}
+    
       </div>
     </div>
 
